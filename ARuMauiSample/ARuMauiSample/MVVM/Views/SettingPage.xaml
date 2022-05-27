@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ARuMauiSample.SettingPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:changeTheme="clr-namespace:ARu.Control.ChangeTheme"
+    Title="設定">
+    <ScrollView>
+        <VerticalStackLayout>
+            <changeTheme:ChangeThemePicker Margin="5" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,4 +1,6 @@
-﻿namespace ARuMauiSample;
+﻿using ARu.Control.ChangeTheme;
+
+namespace ARuMauiSample;
 
 public partial class App : Application
 {
@@ -6,6 +8,7 @@ public partial class App : Application
 	{
 		InitializeComponent();
 
+		ChangeTheme.InitializeTheme();
 		MainPage = new AppShell();
 	}
 }
