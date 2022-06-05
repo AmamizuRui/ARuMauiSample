@@ -1,35 +1,25 @@
 // ----------------------------------------------------------------------------
+// using
+// ----------------------------------------------------------------------------
+using System.Collections;
+
+// ----------------------------------------------------------------------------
 // namespace
 // ----------------------------------------------------------------------------
-namespace ARu.Control.ChangeTheme;
+namespace ARu.Control.License;
 
 // ----------------------------------------------------------------------------
 // class
 // ----------------------------------------------------------------------------
 
 /// <summary>
-/// テーマ変更ピッカー
+/// ライセンス情報一覧
 /// </summary>
-public partial class ChangeThemePicker : ContentView, IDisposable
+public partial class LicenseView : ContentView, IDisposable
 {
     // ----------------------------------------------------------------------------
     // field
     // ----------------------------------------------------------------------------
-
-    /// <summary>
-    /// テーマリスト
-    /// </summary>
-    private List<ChangeThemeItem> _changeThemeItems;
-
-    /// <summary>
-    /// ライトテーマ
-    /// </summary>
-    private ChangeThemeItem _lightTheme;
-
-    /// <summary>
-    /// ダークテーマ
-    /// </summary>
-    private ChangeThemeItem _darkTheme;
 
     /// <summary>
     /// Disposeしたか
@@ -43,38 +33,13 @@ public partial class ChangeThemePicker : ContentView, IDisposable
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    public ChangeThemePicker()
+    public LicenseView()
 	{
 		InitializeComponent();
         _disposedValue = false;
 
-        // Pickerコントロール初期化
-        _lightTheme = new ChangeThemeItem(ChangeTheme.THEME_NAME_LIGHT, AppTheme.Light);
-        _darkTheme = new ChangeThemeItem(ChangeTheme.THEME_NAME_DARK, AppTheme.Dark);
-
-        _changeThemeItems = new List<ChangeThemeItem>();
-        _changeThemeItems.Add(_lightTheme);
-        _changeThemeItems.Add(_darkTheme);
-
-        _themePicker.ItemsSource = ChangeThemeItems;
-        _themePicker.ItemDisplayBinding = new Binding(nameof(ChangeThemeItem.DisplayName));
-
-        // 選択状態初期化
-        switch (Application.Current.UserAppTheme)
-        {
-            case AppTheme.Light:
-                _themePicker.SelectedItem = _lightTheme;
-                break;
-            case AppTheme.Dark:
-                _themePicker.SelectedItem = _darkTheme;
-                break;
-            default:
-                _themePicker.SelectedItem = _lightTheme;
-                break;
-        }
-
-        // テーマ変更イベント登録
-        _themePicker.SelectedIndexChanged += OnSelectedIndexChanged;
+        // アイテム選択イベント登録
+        _licenseListView.ItemSelected += OnItemSelected;
     }
 
     // ----------------------------------------------------------------------------
@@ -96,7 +61,7 @@ public partial class ChangeThemePicker : ContentView, IDisposable
 
             // アンマネージド リソース (アンマネージド オブジェクト) を解放し、ファイナライザーをオーバーライドします
             // 大きなフィールドを null に設定します
-            _themePicker.SelectedIndexChanged -= OnSelectedIndexChanged;
+            _licenseListView.ItemSelected -= OnItemSelected;
             _disposedValue = true;
         }
     }
@@ -104,7 +69,7 @@ public partial class ChangeThemePicker : ContentView, IDisposable
     /// <summary>
     /// デストラクタ
     /// </summary>
-    ~ChangeThemePicker()
+    ~LicenseView()
     {
         // このコードを変更しないでください。クリーンアップ コードを 'Dispose(bool disposing)' メソッドに記述します
         Dispose(disposing: false);
@@ -125,36 +90,46 @@ public partial class ChangeThemePicker : ContentView, IDisposable
     // ----------------------------------------------------------------------------
 
     /// <summary>
-    /// テーマリスト
+    /// ライセンス情報リスト
     /// </summary>
-    public List<ChangeThemeItem> ChangeThemeItems
+    public IEnumerable ItemsSource
     {
-        get { return _changeThemeItems; }
+        get { return (IEnumerable)GetValue(ItemsSourceProperty); }
+        set { SetValue(ItemsSourceProperty, value); }
     }
+    public static readonly BindableProperty ItemsSourceProperty =
+        BindableProperty.Create("ItemsSource", typeof(IEnumerable), typeof(LicenseView), null);
 
     // ----------------------------------------------------------------------------
     // method
     // ----------------------------------------------------------------------------
 
     /// <summary>
-    /// テーマ変更イベント
+    /// アイテム登録イベント
     /// </summary>
-    /// <param name="sender">イベントを発生させたコントロール</param>
-    /// <param name="e">イベント引数</param>
-    private void OnSelectedIndexChanged(object sender, EventArgs e)
+    /// <param name="sender">ListView</param>
+    /// <param name="e">Args</param>
+    private async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
-        Picker picker = sender as Picker;
-        if (picker == null)
+        ListView listView = sender as ListView;
+        if(sender == null)
         {
             return;
         }
 
-        ChangeThemeItem item = picker.SelectedItem as ChangeThemeItem;
-        if (item == null)
+        LicenseItem licenseItem = listView.SelectedItem as LicenseItem;
+        if(licenseItem == null)
         {
             return;
         }
 
-        ChangeTheme.SetTheme(item.Theme);
+        // 選択したライセンス情報を登録
+        LicenseManager.Instance.SelectedLicense = licenseItem;
+
+        // ライセンス詳細ページへ遷移
+        await Shell.Current.GoToAsync($"licenseDetailPage");
+
+        // 選択状態解除
+        listView.SelectedItem = null;
     }
 }

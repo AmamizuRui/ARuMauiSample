@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="ARu.Control.License.LicenseView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:aruControls="clr-namespace:ARu.Control.License">
+
+    <StackLayout VerticalOptions="Fill">
+        <!--  説明  -->
+        <Label
+            Margin="5"
+            LineBreakMode="CharacterWrap"
+            Text="このアプリケーションでは、以下のサードパーティ製ソフトウェア、フォント等を使用しています。" />
+
+        <!--  ライセンス一覧  -->
+        <ListView
+            x:Name="_licenseListView"
+            Margin="5"
+            HeightRequest="100"
+            ItemsSource="{Binding Path=ItemsSource, Source={RelativeSource Mode=FindAncestor, AncestorType={x:Type aruControls:LicenseView}}}"
+            SelectionMode="Single">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Label Text="{Binding Path=LicenseName}" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentView>

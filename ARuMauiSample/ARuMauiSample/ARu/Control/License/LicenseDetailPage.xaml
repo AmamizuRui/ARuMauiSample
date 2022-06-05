@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ARu.Control.License.LicenseDetailPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="詳細">
+    <ScrollView>
+        <StackLayout VerticalOptions="Fill">
+            <!--  ライセンス名  -->
+            <Label x:Name="_licenseNameLabel" Margin="5" />
+
+            <!--  ライセンス詳細  -->
+            <Label
+                x:Name="_licenseDetailLabel"
+                Margin="5"
+                LineBreakMode="WordWrap" />
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

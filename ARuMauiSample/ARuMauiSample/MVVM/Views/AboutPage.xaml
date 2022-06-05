@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ARuMauiSample.AboutPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:aruControls="clr-namespace:ARu.Control.License"
+    xmlns:local="clr-namespace:ARuMauiSample"
+    Title="このアプリについて">
+
+    <!--  ViewModel  -->
+    <ContentPage.BindingContext>
+        <local:AboutViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <StackLayout>
+            <!--  説明  -->
+            <Label
+                Margin="5"
+                FontSize="Large"
+                HorizontalOptions="Start"
+                Text=".NET MAUIのサンプル集です。"
+                VerticalOptions="Center" />
+
+            <!--  バージョン情報  -->
+            <Label
+                Margin="5"
+                FontSize="Micro"
+                HorizontalOptions="Start"
+                Text="{Binding Path=Version}"
+                VerticalOptions="Center" />
+
+            <!--  コピーライト  -->
+            <Label
+                Margin="5"
+                FontSize="Micro"
+                HorizontalOptions="Start"
+                Text="Copyright © 2022 Rui Amamziu.&#xa;All rights reserved."
+                VerticalOptions="Center" />
+
+            <!--  ライセンス一覧  -->
+            <aruControls:LicenseView Margin="0,50" ItemsSource="{Binding Path=LicenseItems}" />
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

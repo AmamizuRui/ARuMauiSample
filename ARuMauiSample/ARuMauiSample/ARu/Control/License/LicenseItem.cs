@@ -1,41 +1,43 @@
 ﻿// ----------------------------------------------------------------------------
 // namespace
 // ----------------------------------------------------------------------------
-
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
-namespace ARuMauiSample.WinUI;
+namespace ARu.Control.License;
 
 // ----------------------------------------------------------------------------
 // class
 // ----------------------------------------------------------------------------
 
 /// <summary>
-/// Provides application-specific behavior to supplement the default Application class.
+/// ライセンス情報
 /// </summary>
-public partial class App : MauiWinUIApplication
+public class LicenseItem
 {
     // ----------------------------------------------------------------------------
     // constructor
     // ----------------------------------------------------------------------------
 
     /// <summary>
-    /// Initializes the singleton application object.  This is the first line of authored code
-    /// executed, and as such is the logical equivalent of main() or WinMain().
+    /// コンストラクタ
     /// </summary>
-    public App()
+    /// <param name="licenseName">ライセンス名</param>
+    /// <param name="licenseDetail">ライセンス詳細</param>
+    public LicenseItem(string licenseName, string licenseDetail)
     {
-        this.InitializeComponent();
+        LicenseName = licenseName;
+        LicenseDetail = licenseDetail;
     }
 
     // ----------------------------------------------------------------------------
-    // method
+    // property
     // ----------------------------------------------------------------------------
 
     /// <summary>
-    /// MauiApp生成
+    /// ライセンス名
     /// </summary>
-    /// <returns></returns>
-    protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
-}
+    public string LicenseName { get; set; }
 
+    /// <summary>
+    /// ライセンス詳細
+    /// </summary>
+    public string LicenseDetail { get; set; }
+}

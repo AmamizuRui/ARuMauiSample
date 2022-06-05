@@ -1,11 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿// ----------------------------------------------------------------------------
+// namespace
+// ----------------------------------------------------------------------------
 namespace ARuMauiSample;
 
+// ----------------------------------------------------------------------------
+// class
+// ----------------------------------------------------------------------------
+
+/// <summary>
+/// 設定ページビューモデル
+/// </summary>
 public class SettingViewModel
 {
 }

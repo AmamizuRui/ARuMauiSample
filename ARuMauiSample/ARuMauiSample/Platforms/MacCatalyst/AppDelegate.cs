@@ -1,9 +1,30 @@
-﻿using Foundation;
+﻿// ----------------------------------------------------------------------------
+// using
+// ----------------------------------------------------------------------------
+using Foundation;
 
+// ----------------------------------------------------------------------------
+// namespace
+// ----------------------------------------------------------------------------
 namespace ARuMauiSample;
 
+// ----------------------------------------------------------------------------
+// class
+// ----------------------------------------------------------------------------
+
+/// <summary>
+/// AppDelegate
+/// </summary>
 [Register("AppDelegate")]
 public class AppDelegate : MauiUIApplicationDelegate
 {
-	protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
+    // ----------------------------------------------------------------------------
+    // method
+    // ----------------------------------------------------------------------------
+    
+    /// <summary>
+    /// MauiApp生成
+    /// </summary>
+    /// <returns></returns>
+    protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
 }

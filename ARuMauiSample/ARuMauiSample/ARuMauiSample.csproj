@@ -19,7 +19,7 @@
 		<ApplicationIdGuid>2AD12361-8815-4E2D-AF37-A590D0EC8831</ApplicationIdGuid>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+		<ApplicationDisplayVersion>1.0.1</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
@@ -30,6 +30,7 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 		<ProvisioningType>manual</ProvisioningType>
 		<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+		<AssemblyVersion></AssemblyVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0-android|AnyCPU'">
@@ -83,11 +84,29 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Resources\Fonts\FontAwesomeFreeSolid.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Resources\Fonts\fa-solid-900.ttf" />
 	  <None Remove="Resources\Images\appicon.png" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiFont Include="Resources\FontAwesomeFreeSolid.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiXaml Update="ARu\Control\ChangeTheme\ChangeThemePicker.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="ARu\Control\License\LicenseDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="ARu\Control\License\LicenseView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Views\AboutPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="MVVM\Views\SettingPage.xaml">

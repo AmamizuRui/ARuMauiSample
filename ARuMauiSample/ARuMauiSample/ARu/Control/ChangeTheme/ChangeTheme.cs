@@ -45,13 +45,15 @@ public static class ChangeTheme
     /// </summary>
     public static void InitializeTheme()
     {
+        // テーマ読込
         string themeName = Preferences.Get(KEY_THEME_NAME, THEME_NAME_NONE);
-        AppTheme appTheme = AppTheme.Unspecified;
 
+        // テーマ選択
+        AppTheme appTheme = AppTheme.Unspecified;
         switch (themeName)
         {
             case THEME_NAME_NONE:
-                appTheme = Application.Current.RequestedTheme;
+                appTheme = AppTheme.Dark;
                 break;
             case THEME_NAME_LIGHT:
                 appTheme = AppTheme.Light;
@@ -64,6 +66,7 @@ public static class ChangeTheme
                 break;
         }
 
+        // テーマ設定
         SetTheme(appTheme);
     }
 
@@ -73,6 +76,13 @@ public static class ChangeTheme
     /// <param name="appTheme">設定するテーマ</param>
     public static void SetTheme(AppTheme appTheme)
     {
+        // 現在のテーマと同じテーマを設定しようとした場合、何もしない
+        if(Application.Current.UserAppTheme == appTheme)
+        {
+            return;
+        }
+
+        // テーマ保存
         string saveTheme = THEME_NAME_NONE;
         switch(appTheme)
         {
@@ -86,8 +96,9 @@ public static class ChangeTheme
                 saveTheme = THEME_NAME_LIGHT;
                 break;
         }
-
         Preferences.Set(KEY_THEME_NAME, saveTheme);
+
+        // テーマ変更
         Application.Current.UserAppTheme = appTheme;
     }
 }

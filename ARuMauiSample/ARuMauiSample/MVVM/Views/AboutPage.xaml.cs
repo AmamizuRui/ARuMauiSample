@@ -1,8 +1,3 @@
-ï»¿// ----------------------------------------------------------------------------
-// using
-// ----------------------------------------------------------------------------
-using Foundation;
-
 // ----------------------------------------------------------------------------
 // namespace
 // ----------------------------------------------------------------------------
@@ -13,18 +8,19 @@ namespace ARuMauiSample;
 // ----------------------------------------------------------------------------
 
 /// <summary>
-/// AppDelegate
+/// ƒAƒvƒŠà–¾ƒy[ƒW
 /// </summary>
-[Register("AppDelegate")]
-public class AppDelegate : MauiUIApplicationDelegate
+public partial class AboutPage : ContentPage
 {
     // ----------------------------------------------------------------------------
-    // method
+    // constructor
     // ----------------------------------------------------------------------------
 
     /// <summary>
-    /// MauiAppç”Ÿæˆ
+    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
     /// </summary>
-    /// <returns></returns>
-    protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
+	public AboutPage()
+	{
+		InitializeComponent();
+	}
 }
